@@ -110,8 +110,8 @@ export default function ApplyForm() {
                 }}
               />
 
-              <span className="text-[10.5px] uppercase tracking-[0.22em] text-gold-300">
-                Free Consultation
+              <span className="text-[11.5px] tracking-[0.04em] text-gold-300">
+                무료 상담 안내
               </span>
               <h3 className="mt-4 font-serif text-[22px] font-medium leading-[1.3] tracking-tight sm:text-[26px]">
                 상담은 무료이며,

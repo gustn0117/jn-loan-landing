@@ -1,10 +1,10 @@
 const items = [
-  "JN LOAN CONSULTATION",
-  "TRUSTED · TRANSPARENT · FAST",
-  "FREE CONSULTATION",
-  "NO IMPACT ON CREDIT SCORE",
-  "REG. 2023-광주광산-0014",
-  "EST. 2023",
+  "100% 무료 상담",
+  "신용점수 영향 없음",
+  "전문가 1:1 안내",
+  "법정 한도 내 안전한 운영",
+  "개인정보 즉시 파기",
+  "광주 광산구 등록 대부업체",
 ];
 
 function Diamond() {
@@ -28,7 +28,7 @@ export default function Marquee() {
     <div className="flex shrink-0 items-center whitespace-nowrap">
       {items.map((it, i) => (
         <span key={i} className="flex items-center">
-          <span className="text-[11.5px] font-medium uppercase tracking-[0.32em] text-ink-700/70">
+          <span className="text-[12px] font-medium tracking-[0.04em] text-ink-700/75">
             {it}
           </span>
           <Diamond />

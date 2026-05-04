@@ -49,14 +49,14 @@ export default function Hero() {
 
       <div className="mx-auto max-w-[1240px] px-5 sm:px-6 lg:px-10">
         {/* Top hairline meta row */}
-        <div className="reveal mb-10 flex items-center justify-between gap-3 border-b border-[rgba(10,16,32,0.08)] pb-4 text-[10px] uppercase tracking-[0.18em] text-ink-700/65 sm:mb-12 sm:text-[11px] sm:tracking-[0.22em]">
+        <div className="reveal mb-10 flex items-center justify-between gap-3 border-b border-[rgba(10,16,32,0.08)] pb-4 text-[11px] text-ink-700/70 sm:mb-12 sm:text-[12px]">
           <span className="flex items-center gap-2">
             <span className="pulse-dot inline-block h-1.5 w-1.5 rounded-full bg-gold-500" />
-            <span className="hidden sm:inline">JN Loan · Consultation</span>
-            <span className="sm:hidden">JN Loan</span>
+            <span className="hidden sm:inline">제이앤대부 · 무료 상담</span>
+            <span className="sm:hidden">제이앤대부</span>
           </span>
-          <span className="hidden sm:inline">Reg. 2023-광주광산-0014</span>
-          <span>Est. 2023</span>
+          <span className="hidden sm:inline">등록번호 2023-광주광산-0014</span>
+          <span>2023년 설립</span>
         </div>
 
         <div className="grid gap-x-12 gap-y-12 sm:gap-y-14 lg:grid-cols-12 lg:gap-y-16">

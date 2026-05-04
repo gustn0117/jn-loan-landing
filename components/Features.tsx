@@ -48,8 +48,8 @@ export default function Features() {
               고려하는 정직한 절차를 약속합니다.
             </p>
           </div>
-          <p className="text-[11.5px] uppercase tracking-[0.22em] text-ink-700/60 sm:text-[12px]">
-            Trusted · Transparent · Fast
+          <p className="text-[12px] text-ink-700/70 sm:text-[12.5px]">
+            신뢰 · 투명 · 신속
           </p>
         </div>
 
