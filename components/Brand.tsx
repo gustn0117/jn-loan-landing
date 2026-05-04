@@ -25,17 +25,14 @@ export function Monogram({ className = "h-10 w-10", ...rest }: SvgProps) {
         strokeOpacity="0.12"
         strokeWidth="0.5"
       />
-      <text
-        x="20"
-        y="26.5"
-        textAnchor="middle"
-        fontFamily="'Noto Serif KR', serif"
-        fontSize="19"
-        fontWeight="500"
-        fill="currentColor"
-      >
-        J
-      </text>
+      <circle
+        cx="20"
+        cy="20"
+        r="3"
+        stroke="#B58A33"
+        strokeWidth="0.9"
+        fill="none"
+      />
       <circle cx="29.5" cy="10.5" r="1.35" fill="#B58A33" />
       <line
         x1="9"

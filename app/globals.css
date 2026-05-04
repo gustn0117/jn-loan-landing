@@ -24,6 +24,17 @@ body {
   font-feature-settings: "ss01", "ss02", "tnum";
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  /* Korean line-break: wrap on word (eojeol) boundaries, never split letters */
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+/* Headings: balance lines so a single tail character never drops alone */
+h1, h2, h3, h4 {
+  text-wrap: balance;
+}
+p {
+  text-wrap: pretty;
 }
 
 * {
