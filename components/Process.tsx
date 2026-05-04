@@ -29,7 +29,16 @@ const steps = [
 
 export default function Process() {
   return (
-    <section className="relative bg-[#f3f1ea] py-20 sm:py-28 lg:py-32">
+    <section className="relative isolate overflow-hidden bg-[#f3f1ea] py-20 sm:py-28 lg:py-32">
+      {/* Decorative accent */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 -z-10 opacity-70"
+        style={{
+          background:
+            "radial-gradient(800px 420px at 100% 0%, rgba(217,187,107,0.18), transparent 55%), radial-gradient(600px 380px at 0% 100%, rgba(10,16,32,0.04), transparent 55%)",
+        }}
+      />
       <div className="mx-auto max-w-[1240px] px-5 sm:px-6 lg:px-10">
         {/* Section header */}
         <div className="mb-12 flex flex-col items-start justify-between gap-5 sm:mb-16 sm:gap-6 lg:flex-row lg:items-end">
@@ -66,25 +75,45 @@ export default function Process() {
             />
           </svg>
 
-          <ol className="grid gap-9 sm:grid-cols-2 sm:gap-10 lg:grid-cols-4 lg:gap-6">
-            {steps.map((s) => (
-              <li key={s.no} className="relative">
-                {/* Big circle with icon */}
-                <div className="relative inline-flex">
-                  <div className="relative grid h-[96px] w-[96px] place-items-center rounded-full border border-[rgba(10,16,32,0.18)] bg-[#f3f1ea] sm:h-[112px] sm:w-[112px]">
-                    <s.Icon className="h-7 w-7 text-ink-900 sm:h-8 sm:w-8" />
-                  </div>
-                  <span className="absolute -top-1 -right-1 grid h-9 w-9 place-items-center rounded-full bg-ink-900 font-serif text-[13px] font-medium tracking-tight text-gold-300 shadow-card">
-                    {s.no}
+          <ol className="grid gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4">
+            {steps.map((s, i) => (
+              <li
+                key={s.no}
+                className="group relative flex flex-col rounded-2xl border border-[rgba(10,16,32,0.08)] bg-white/80 p-6 backdrop-blur transition hover:-translate-y-1 hover:border-ink-900/25 hover:bg-white hover:shadow-card sm:p-7"
+              >
+                {/* Top row: number + icon */}
+                <div className="flex items-center justify-between">
+                  <span className="font-serif text-[14px] font-medium tracking-[0.2em] text-gold-500">
+                    STEP {s.no}
+                  </span>
+                  <span className="grid h-11 w-11 place-items-center rounded-xl bg-ink-950 text-gold-300 transition group-hover:bg-gradient-to-br group-hover:from-ink-900 group-hover:to-[#1a2240]">
+                    <s.Icon className="h-5 w-5" />
                   </span>
                 </div>
 
-                <h3 className="mt-6 font-serif text-[20px] font-medium tracking-tight text-ink-900 sm:mt-7 sm:text-[22px]">
+                {/* Mini progress bar */}
+                <div className="mt-5 h-1 w-full overflow-hidden rounded-full bg-ink-900/10">
+                  <span
+                    className="block h-full rounded-full bg-gradient-to-r from-gold-400 to-gold-600"
+                    style={{ width: `${((i + 1) / steps.length) * 100}%` }}
+                  />
+                </div>
+
+                <h3 className="mt-6 font-serif text-[19px] font-medium tracking-tight text-ink-900 sm:text-[21px]">
                   {s.title}
                 </h3>
-                <p className="mt-2.5 max-w-[280px] text-[13px] leading-[1.8] text-ink-700 sm:mt-3 sm:text-[13.5px]">
+                <p className="mt-2.5 flex-1 text-[13px] leading-[1.8] text-ink-700 sm:text-[13.5px]">
                   {s.body}
                 </p>
+
+                {/* Bottom hint */}
+                <div className="mt-5 flex items-center gap-2 border-t border-[rgba(10,16,32,0.06)] pt-4 text-[11.5px] uppercase tracking-[0.16em] text-ink-700/60">
+                  <span className="h-1 w-1 rounded-full bg-gold-500" />
+                  {i === 0 && "30초 입력"}
+                  {i === 1 && "1:1 전화"}
+                  {i === 2 && "조건 안내"}
+                  {i === 3 && "선택은 자유"}
+                </div>
               </li>
             ))}
           </ol>

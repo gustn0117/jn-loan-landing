@@ -6,25 +6,44 @@ export default function Hero() {
       id="top"
       className="relative isolate overflow-hidden pt-24 pb-20 sm:pt-32 sm:pb-24 lg:pt-36 lg:pb-28"
     >
-      {/* Soft radial gradient backdrop */}
+      {/* Layered gradient backdrop */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 -z-10"
         style={{
           background:
-            "radial-gradient(900px 500px at 85% -10%, rgba(217,187,107,0.14), transparent 55%), radial-gradient(700px 400px at 0% 20%, rgba(10,16,32,0.05), transparent 55%)",
+            "radial-gradient(1100px 620px at 88% -8%, rgba(217,187,107,0.32), transparent 55%), radial-gradient(800px 460px at -5% 20%, rgba(181,138,51,0.12), transparent 55%), radial-gradient(600px 360px at 50% 100%, rgba(10,16,32,0.06), transparent 60%)",
         }}
       />
-      {/* Faint grid mask only behind text column */}
+      {/* Grid pattern */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-y-0 left-0 -z-10 hidden w-1/2 opacity-30 lg:block"
+        className="pointer-events-none absolute inset-0 -z-10 opacity-[0.35]"
         style={{
           backgroundImage:
             "linear-gradient(to right, rgba(10,16,32,0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(10,16,32,0.05) 1px, transparent 1px)",
-          backgroundSize: "48px 48px",
+          backgroundSize: "56px 56px",
           maskImage:
-            "linear-gradient(to right, black 30%, transparent 95%)",
+            "radial-gradient(900px 600px at 30% 40%, black 30%, transparent 80%)",
+          WebkitMaskImage:
+            "radial-gradient(900px 600px at 30% 40%, black 30%, transparent 80%)",
+        }}
+      />
+      {/* Floating gold orbs */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -right-24 top-24 -z-10 h-72 w-72 rounded-full opacity-60 blur-3xl sm:right-0 sm:h-96 sm:w-96"
+        style={{
+          background:
+            "radial-gradient(circle, rgba(217,187,107,0.45) 0%, rgba(217,187,107,0) 70%)",
+        }}
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -left-32 bottom-12 -z-10 h-72 w-72 rounded-full opacity-50 blur-3xl"
+        style={{
+          background:
+            "radial-gradient(circle, rgba(181,138,51,0.28) 0%, rgba(181,138,51,0) 70%)",
         }}
       />
 
@@ -43,7 +62,21 @@ export default function Hero() {
         <div className="grid gap-x-12 gap-y-12 sm:gap-y-14 lg:grid-cols-12 lg:gap-y-16">
           {/* Headline column */}
           <div className="lg:col-span-7">
-            <h1 className="reveal delay-1 font-serif text-[34px] font-medium leading-[1.12] tracking-tightest text-ink-900 sm:text-[44px] md:text-[52px] lg:text-[60px]">
+            {/* Trust badge above headline */}
+            <div className="reveal mb-5 inline-flex items-center gap-2.5 rounded-full border border-gold-300/60 bg-white/80 px-3.5 py-1.5 shadow-[0_2px_12px_-4px_rgba(181,138,51,0.25)] backdrop-blur sm:mb-7 sm:gap-3 sm:px-4 sm:py-2">
+              <span className="flex -space-x-0.5 text-[12px] text-gold-500 sm:text-[13px]">
+                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+              </span>
+              <span className="text-[11.5px] font-medium text-ink-900 sm:text-[12.5px]">
+                평균 만족도 <span className="text-gradient-gold font-semibold">4.9/5</span>
+              </span>
+              <span className="hidden h-3 w-px bg-ink-900/15 sm:block" />
+              <span className="hidden text-[11px] text-ink-700/70 sm:inline">
+                실제 상담 후기 기반
+              </span>
+            </div>
+
+            <h1 className="reveal delay-1 font-serif text-[36px] font-medium leading-[1.08] tracking-tightest text-ink-900 sm:text-[48px] md:text-[58px] lg:text-[68px]">
               <span className="block">다양한 신용 상황에서도,</span>
               <span className="relative inline-block">
                 <span className="relative z-10">
