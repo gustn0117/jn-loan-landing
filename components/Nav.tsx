@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Monogram } from "./Brand";
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
@@ -22,11 +21,12 @@ export default function Nav() {
       }`}
     >
       <div className="mx-auto flex h-16 max-w-[1240px] items-center justify-between px-4 sm:px-6 lg:px-10">
-        <a href="#top" className="flex items-center gap-2.5 sm:gap-3">
-          <Monogram className="h-8 w-8 text-ink-900 sm:h-9 sm:w-9" />
-          <span className="text-[13.5px] font-medium tracking-tight text-ink-900 sm:text-sm">
-            제이앤대부 <span className="text-gradient-gold">소액대출</span>
-          </span>
+        <a
+          href="#top"
+          className="text-[15px] font-semibold tracking-tight text-ink-900 sm:text-[16px]"
+        >
+          제이앤대부{" "}
+          <span className="text-gradient-gold font-bold">소액대출</span>
         </a>
 
         <nav className="hidden items-center gap-8 text-[13.5px] text-ink-700 md:flex">

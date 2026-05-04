@@ -29,7 +29,12 @@ body {
   overflow-wrap: break-word;
 }
 
-/* Headings: balance lines so a single tail character never drops alone */
+/* Headings: balance lines so a single tail character never drops alone.
+   Note: Tailwind text-* utilities ship a bundled line-height. To control
+   leading per-heading, use arbitrary values placed AFTER the size class:
+   e.g. `text-4xl leading-[1.15]`. Don't rely on a global line-height rule
+   here — Tailwind would override it and !important would clobber the
+   intentional leading-[…] values used throughout the codebase. */
 h1, h2, h3, h4 {
   text-wrap: balance;
 }

@@ -1,19 +1,15 @@
 "use client";
 
-import { Monogram } from "./Brand";
-
 export default function Footer() {
   return (
     <footer className="relative bg-ink-950 pt-16 pb-8 text-white/80 sm:pt-20 sm:pb-10">
       <div className="mx-auto max-w-[1240px] px-5 sm:px-6 lg:px-10">
         <div className="grid gap-10 sm:gap-14 lg:grid-cols-12">
           <div className="lg:col-span-5">
-            <div className="flex items-center gap-3">
-              <Monogram className="h-10 w-10 text-white" />
-              <span className="text-[15px] font-medium tracking-tight text-white">
-                제이앤대부 <span className="text-gold-300">소액대출</span>
-              </span>
-            </div>
+            <p className="text-[18px] font-semibold tracking-tight text-white sm:text-[20px]">
+              제이앤대부{" "}
+              <span className="text-gold-300 font-bold">소액대출</span>
+            </p>
             <p className="mt-6 max-w-md text-[13.5px] leading-[1.85] text-white/60">
               신용점수가 낮은 고객을 위한 믿을 수 있는 대출 상담 서비스. 투명하고
               안전한 절차로 고객의 상황에 맞는 최적의 상담을 제공합니다.
