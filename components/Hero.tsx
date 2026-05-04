@@ -76,8 +76,8 @@ export default function Hero() {
               </span>
             </div>
 
-            <h1 className="reveal delay-1 font-serif text-[36px] font-medium leading-[1.08] tracking-tightest text-ink-900 sm:text-[48px] md:text-[58px] lg:text-[68px]">
-              <span className="block">다양한 신용 상황에서도,</span>
+            <h1 className="reveal delay-1 font-serif text-[30px] font-medium leading-[1.12] tracking-tightest text-ink-900 sm:text-[44px] md:text-[54px] lg:text-[64px]">
+              <span className="block whitespace-nowrap">다양한 신용 상황에서도,</span>
               <span className="relative inline-block">
                 <span className="relative z-10">
                   상담은 <span className="text-gradient-gold">가능합니다</span>
