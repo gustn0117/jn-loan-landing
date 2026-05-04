@@ -29,15 +29,15 @@ const steps = [
 
 export default function Process() {
   return (
-    <section className="relative bg-[#f3f1ea] py-24 sm:py-32">
-      <div className="mx-auto max-w-[1240px] px-6 lg:px-10">
+    <section className="relative bg-[#f3f1ea] py-20 sm:py-28 lg:py-32">
+      <div className="mx-auto max-w-[1240px] px-5 sm:px-6 lg:px-10">
         {/* Section header */}
-        <div className="mb-16 flex flex-col items-start justify-between gap-6 lg:flex-row lg:items-end">
+        <div className="mb-12 flex flex-col items-start justify-between gap-5 sm:mb-16 sm:gap-6 lg:flex-row lg:items-end">
           <div>
             <p className="kicker">
               <span>02</span> Process
             </p>
-            <h2 className="mt-5 font-serif text-[32px] font-medium leading-[1.15] tracking-tightest text-ink-900 sm:text-[44px]">
+            <h2 className="mt-4 font-serif text-[28px] font-medium leading-[1.15] tracking-tightest text-ink-900 sm:text-[36px] lg:text-[44px]">
               네 단계로 끝나는 상담
             </h2>
           </div>
@@ -66,23 +66,23 @@ export default function Process() {
             />
           </svg>
 
-          <ol className="grid gap-12 lg:grid-cols-4 lg:gap-6">
+          <ol className="grid gap-9 sm:grid-cols-2 sm:gap-10 lg:grid-cols-4 lg:gap-6">
             {steps.map((s) => (
               <li key={s.no} className="relative">
                 {/* Big circle with icon */}
                 <div className="relative inline-flex">
-                  <div className="relative grid h-[112px] w-[112px] place-items-center rounded-full border border-[rgba(10,16,32,0.18)] bg-[#f3f1ea]">
-                    <s.Icon className="h-8 w-8 text-ink-900" />
+                  <div className="relative grid h-[96px] w-[96px] place-items-center rounded-full border border-[rgba(10,16,32,0.18)] bg-[#f3f1ea] sm:h-[112px] sm:w-[112px]">
+                    <s.Icon className="h-7 w-7 text-ink-900 sm:h-8 sm:w-8" />
                   </div>
                   <span className="absolute -top-1 -right-1 grid h-9 w-9 place-items-center rounded-full bg-ink-900 font-serif text-[13px] font-medium tracking-tight text-gold-300 shadow-card">
                     {s.no}
                   </span>
                 </div>
 
-                <h3 className="mt-7 font-serif text-[22px] font-medium tracking-tight text-ink-900">
+                <h3 className="mt-6 font-serif text-[20px] font-medium tracking-tight text-ink-900 sm:mt-7 sm:text-[22px]">
                   {s.title}
                 </h3>
-                <p className="mt-3 max-w-[280px] text-[13.5px] leading-[1.8] text-ink-700">
+                <p className="mt-2.5 max-w-[280px] text-[13px] leading-[1.8] text-ink-700 sm:mt-3 sm:text-[13.5px]">
                   {s.body}
                 </p>
               </li>

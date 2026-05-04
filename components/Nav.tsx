@@ -21,10 +21,10 @@ export default function Nav() {
           : "bg-transparent"
       }`}
     >
-      <div className="mx-auto flex h-16 max-w-[1240px] items-center justify-between px-6 lg:px-10">
-        <a href="#top" className="flex items-center gap-3">
-          <Monogram className="h-9 w-9 text-ink-900" />
-          <span className="hidden text-sm font-medium tracking-tight text-ink-900 sm:block">
+      <div className="mx-auto flex h-16 max-w-[1240px] items-center justify-between px-4 sm:px-6 lg:px-10">
+        <a href="#top" className="flex items-center gap-2.5 sm:gap-3">
+          <Monogram className="h-8 w-8 text-ink-900 sm:h-9 sm:w-9" />
+          <span className="text-[13.5px] font-medium tracking-tight text-ink-900 sm:text-sm">
             제이앤대부 <span className="text-gradient-gold">소액대출</span>
           </span>
         </a>

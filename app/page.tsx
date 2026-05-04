@@ -4,6 +4,8 @@ import Marquee from "@/components/Marquee";
 import Features from "@/components/Features";
 import Process from "@/components/Process";
 import LoanInfo from "@/components/LoanInfo";
+import Testimonials from "@/components/Testimonials";
+import FAQ from "@/components/FAQ";
 import ApplyForm from "@/components/ApplyForm";
 import Footer from "@/components/Footer";
 
@@ -16,6 +18,8 @@ export default function Page() {
       <Features />
       <Process />
       <LoanInfo />
+      <Testimonials />
+      <FAQ />
       <ApplyForm />
       <Footer />
     </main>

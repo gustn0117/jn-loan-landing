@@ -4,9 +4,9 @@ import { Monogram } from "./Brand";
 
 export default function Footer() {
   return (
-    <footer className="relative bg-ink-950 pt-20 pb-10 text-white/80">
-      <div className="mx-auto max-w-[1240px] px-6 lg:px-10">
-        <div className="grid gap-14 lg:grid-cols-12">
+    <footer className="relative bg-ink-950 pt-16 pb-8 text-white/80 sm:pt-20 sm:pb-10">
+      <div className="mx-auto max-w-[1240px] px-5 sm:px-6 lg:px-10">
+        <div className="grid gap-10 sm:gap-14 lg:grid-cols-12">
           <div className="lg:col-span-5">
             <div className="flex items-center gap-3">
               <Monogram className="h-10 w-10 text-white" />
@@ -59,7 +59,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-14 border-t border-white/10 pt-8">
+        <div className="mt-10 border-t border-white/10 pt-6 sm:mt-14 sm:pt-8">
           <div className="flex flex-col gap-4 text-[12px] text-white/55 md:flex-row md:items-center md:justify-between">
             <div className="space-y-1">
               <p>

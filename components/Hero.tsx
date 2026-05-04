@@ -4,7 +4,7 @@ export default function Hero() {
   return (
     <section
       id="top"
-      className="relative isolate overflow-hidden pt-28 pb-24 sm:pt-36 sm:pb-28"
+      className="relative isolate overflow-hidden pt-24 pb-20 sm:pt-32 sm:pb-24 lg:pt-36 lg:pb-28"
     >
       {/* Soft radial gradient backdrop */}
       <div
@@ -28,21 +28,22 @@ export default function Hero() {
         }}
       />
 
-      <div className="mx-auto max-w-[1240px] px-6 lg:px-10">
+      <div className="mx-auto max-w-[1240px] px-5 sm:px-6 lg:px-10">
         {/* Top hairline meta row */}
-        <div className="reveal mb-12 flex items-center justify-between border-b border-[rgba(10,16,32,0.08)] pb-4 text-[11px] uppercase tracking-[0.22em] text-ink-700/65">
+        <div className="reveal mb-10 flex items-center justify-between gap-3 border-b border-[rgba(10,16,32,0.08)] pb-4 text-[10px] uppercase tracking-[0.18em] text-ink-700/65 sm:mb-12 sm:text-[11px] sm:tracking-[0.22em]">
           <span className="flex items-center gap-2">
             <span className="pulse-dot inline-block h-1.5 w-1.5 rounded-full bg-gold-500" />
-            JN Loan · Consultation
+            <span className="hidden sm:inline">JN Loan · Consultation</span>
+            <span className="sm:hidden">JN Loan</span>
           </span>
           <span className="hidden sm:inline">Reg. 2023-광주광산-0014</span>
           <span>Est. 2023</span>
         </div>
 
-        <div className="grid gap-x-12 gap-y-16 lg:grid-cols-12">
+        <div className="grid gap-x-12 gap-y-12 sm:gap-y-14 lg:grid-cols-12 lg:gap-y-16">
           {/* Headline column */}
           <div className="lg:col-span-7">
-            <h1 className="reveal delay-1 font-serif text-[40px] font-medium leading-[1.1] tracking-tightest text-ink-900 sm:text-[52px] lg:text-[60px]">
+            <h1 className="reveal delay-1 font-serif text-[34px] font-medium leading-[1.12] tracking-tightest text-ink-900 sm:text-[44px] md:text-[52px] lg:text-[60px]">
               <span className="block">다양한 신용 상황에서도,</span>
               <span className="relative inline-block">
                 <span className="relative z-10">
@@ -66,12 +67,12 @@ export default function Hero() {
               </span>
             </h1>
 
-            <p className="reveal delay-2 mt-10 max-w-[480px] text-[16px] leading-[1.85] text-ink-700">
+            <p className="reveal delay-2 mt-8 max-w-[480px] text-[15px] leading-[1.85] text-ink-700 sm:mt-10 sm:text-[16px]">
               간편한 정보 입력으로 당신의 상황에 맞는 맞춤형 대출 상담을 받아보세요.
               빠르고, 간단하고, 투명합니다.
             </p>
 
-            <div className="reveal delay-3 mt-10 flex flex-wrap items-center gap-5">
+            <div className="reveal delay-3 mt-8 flex flex-wrap items-center gap-4 sm:mt-10 sm:gap-5">
               <a href="#apply" className="btn-luxe">
                 <span>지금 상담받기</span>
                 <span className="btn-arrow">→</span>
@@ -86,7 +87,7 @@ export default function Hero() {
             </div>
 
             {/* Trust grid — 4 columns, equal weight */}
-            <div className="reveal delay-4 mt-16 grid grid-cols-2 gap-x-8 gap-y-6 border-t border-[rgba(10,16,32,0.08)] pt-8 sm:grid-cols-4">
+            <div className="reveal delay-4 mt-12 grid grid-cols-2 gap-x-6 gap-y-5 border-t border-[rgba(10,16,32,0.08)] pt-7 sm:mt-16 sm:gap-x-8 sm:gap-y-6 sm:pt-8 sm:grid-cols-4">
               <Stat label="상담 비용" value="무료" sub="100% 무료 상담" />
               <Stat label="신용점수" value="영향 없음" sub="조회 영향 X" />
               <Stat label="이자율" value="연 20% 이내" sub="법정 한도 준수" />
@@ -110,15 +111,15 @@ export default function Hero() {
                   </span>
                 </header>
 
-                <div className="px-8 pt-10">
+                <div className="px-6 pt-8 sm:px-8 sm:pt-10">
                   <p className="text-[12px] uppercase tracking-[0.18em] text-ink-700/70">
                     대부이자율 — 연
                   </p>
                   <div className="mt-2 flex items-baseline gap-2">
-                    <span className="font-serif text-[88px] font-medium leading-none tracking-tightest text-gradient-gold">
+                    <span className="font-serif text-[68px] font-medium leading-none tracking-tightest text-gradient-gold sm:text-[88px]">
                       20
                     </span>
-                    <span className="font-serif text-[28px] text-ink-700">%</span>
+                    <span className="font-serif text-[24px] text-ink-700 sm:text-[28px]">%</span>
                     <span className="ml-2 text-[12px] text-ink-700/70">
                       이내
                     </span>
@@ -130,7 +131,7 @@ export default function Hero() {
                 </div>
 
                 {/* 4 detail rows */}
-                <div className="grid grid-cols-2 px-8 pt-6 pb-2">
+                <div className="grid grid-cols-2 gap-x-3 px-6 pt-6 pb-2 sm:px-8">
                   <Detail label="연체이자율" value="정상이율 + 3%p" />
                   <Detail label="상담 방식" value="전문가 1:1" />
                   <Detail label="처리 절차" value="간편 정보 입력" border />
@@ -138,7 +139,7 @@ export default function Hero() {
                 </div>
 
                 {/* Footer compliance */}
-                <div className="mx-8 my-6 flex items-center justify-between rounded-2xl bg-ink-950 px-5 py-4 text-white">
+                <div className="mx-6 my-5 flex items-center justify-between rounded-2xl bg-ink-950 px-5 py-4 text-white sm:mx-8 sm:my-6">
                   <div>
                     <p className="text-[10px] uppercase tracking-[0.22em] text-gold-300">
                       Compliance

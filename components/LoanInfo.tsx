@@ -4,7 +4,7 @@ export default function LoanInfo() {
   return (
     <section
       id="info"
-      className="relative isolate overflow-hidden bg-ink-950 py-24 text-white sm:py-32"
+      className="relative isolate overflow-hidden bg-ink-950 py-20 text-white sm:py-28 lg:py-32"
     >
       {/* Subtle gradient backdrop */}
       <div
@@ -16,19 +16,19 @@ export default function LoanInfo() {
         }}
       />
 
-      <div className="mx-auto max-w-[1240px] px-6 lg:px-10">
+      <div className="mx-auto max-w-[1240px] px-5 sm:px-6 lg:px-10">
         {/* Section header — symmetrical */}
-        <div className="grid gap-10 border-b border-white/10 pb-12 lg:grid-cols-12">
+        <div className="grid gap-8 border-b border-white/10 pb-10 sm:gap-10 sm:pb-12 lg:grid-cols-12">
           <div className="lg:col-span-7">
             <p className="kicker !text-gold-300">
               <span className="text-gold-300">03</span> Loan Information
             </p>
-            <h2 className="mt-5 font-serif text-[32px] font-medium leading-[1.15] tracking-tightest sm:text-[48px]">
+            <h2 className="mt-4 font-serif text-[28px] font-medium leading-[1.15] tracking-tightest sm:text-[36px] lg:text-[48px]">
               신용대출 정보
             </h2>
           </div>
           <div className="lg:col-span-5">
-            <p className="text-[14.5px] leading-[1.85] text-white/70">
+            <p className="text-[14px] leading-[1.85] text-white/70 sm:text-[14.5px]">
               저신용 소액대출에 대한 상세 정보를 안내해드립니다. 금융감독 당국의
               엄격한 기준을 준수하며, 모든 거래는 투명하고 안전하게 처리됩니다.
             </p>
@@ -36,7 +36,7 @@ export default function LoanInfo() {
         </div>
 
         {/* Info blocks - 12 col grid: 4/4/4 */}
-        <div className="grid gap-x-10 gap-y-12 pt-16 lg:grid-cols-3">
+        <div className="grid gap-x-10 gap-y-10 pt-12 sm:gap-y-12 sm:pt-16 lg:grid-cols-3">
           <Block
             kicker="Service"
             title="서비스 소개"
@@ -55,14 +55,14 @@ export default function LoanInfo() {
         </div>
 
         {/* Hero stat row — Terms summary */}
-        <div className="mt-16 grid gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/10 sm:grid-cols-3">
+        <div className="mt-12 grid gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/10 sm:mt-16 sm:grid-cols-3">
           <Stat label="대부이자율" value="20%" sub="연 20% 이내" />
           <Stat label="연체이자율" value="+3%p" sub="정상이율 + 최대 3%" />
           <Stat label="등록번호" value="2023" sub="2023-광주광산-0014" mono />
         </div>
 
         {/* Pillars */}
-        <div className="mt-10 grid gap-4 sm:grid-cols-3">
+        <div className="mt-8 grid gap-3 sm:mt-10 sm:gap-4 sm:grid-cols-3">
           <Pillar
             title="안전한 거래"
             body="개인정보 암호화 및 보안 체계를 통한 안전한 정보 관리"
@@ -151,7 +151,7 @@ function Pillar({
     <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-6 transition hover:border-gold-300/40 hover:bg-white/[0.04]">
       <div className="flex items-center gap-3">
         <span className="grid h-9 w-9 place-items-center rounded-lg border border-white/15 text-gold-300">
-          <Icon className="h-4.5 w-4.5" />
+          <Icon className="h-[18px] w-[18px]" />
         </span>
         <h4 className="text-[14.5px] font-semibold tracking-tight text-white">
           {title}
