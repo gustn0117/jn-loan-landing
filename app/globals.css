@@ -132,6 +132,61 @@ p {
   text-transform: uppercase;
 }
 
+/* Select field — same underline aesthetic, label always pinned up */
+.select-field {
+  position: relative;
+}
+.select-field select {
+  width: 100%;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid rgba(10, 16, 32, 0.18);
+  padding: 1.6rem 1.5rem 0.75rem 0;
+  font-size: 1rem;
+  color: var(--ink);
+  outline: none;
+  transition: border-color 0.25s ease;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+}
+.select-field select:focus {
+  border-bottom-color: var(--gold);
+}
+.select-field select:invalid {
+  color: #9ca3af;
+}
+.select-field select option {
+  color: var(--ink);
+}
+.select-field label {
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  color: #6b7280;
+  pointer-events: none;
+  text-transform: uppercase;
+  transition: color 0.2s ease;
+}
+.select-field:focus-within label {
+  color: var(--gold);
+}
+.select-field .select-arrow {
+  position: absolute;
+  right: 0;
+  bottom: 0.85rem;
+  pointer-events: none;
+  color: rgba(10, 16, 32, 0.5);
+  font-size: 0.8rem;
+  transition: color 0.2s ease;
+}
+.select-field:focus-within .select-arrow {
+  color: var(--gold);
+}
+
 /* Gold shimmer line for premium accents */
 .gold-line {
   height: 1px;

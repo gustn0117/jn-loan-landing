@@ -11,6 +11,7 @@ const RATE_LIMIT_SOFT = 3;
 const RATE_LIMIT_HARD = 5;
 
 const PHONE_RE = /^[0-9\-+\s()]{9,20}$/;
+const ALLOWED_JOBS = ["무직자", "직장인", "개인사업자", "법인사업자"];
 
 export async function POST(req: NextRequest) {
   try {
@@ -40,7 +41,10 @@ export async function POST(req: NextRequest) {
     ) {
       return NextResponse.json({ ok: false, error: "INVALID" }, { status: 400 });
     }
-    if (name.length > 40 || (typeof job === "string" && job.length > 80)) {
+    if (typeof job !== "string" || !ALLOWED_JOBS.includes(job)) {
+      return NextResponse.json({ ok: false, error: "INVALID" }, { status: 400 });
+    }
+    if (name.length > 40) {
       return NextResponse.json({ ok: false, error: "INVALID" }, { status: 400 });
     }
 
@@ -88,7 +92,7 @@ export async function POST(req: NextRequest) {
       name: String(name).trim().slice(0, 40),
       phone: String(phone).trim().slice(0, 20),
       age: ageNum && Number.isFinite(ageNum) ? Math.floor(ageNum) : null,
-      job: typeof job === "string" ? job.trim().slice(0, 80) : null,
+      job: job as string,
       ip,
       user_agent: ua?.slice(0, 300) ?? null,
     });

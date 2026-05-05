@@ -20,6 +20,8 @@ const initial: Form = {
   hp: "",
 };
 
+const JOB_OPTIONS = ["무직자", "직장인", "개인사업자", "법인사업자"];
+
 export default function ApplyForm() {
   const [form, setForm] = useState<Form>(initial);
   const [submitted, setSubmitted] = useState(false);
@@ -207,11 +209,12 @@ export default function ApplyForm() {
                       value={form.age}
                       onChange={(v) => update("age", v)}
                     />
-                    <Field
+                    <SelectField
                       id="job"
                       label="직장"
                       value={form.job}
                       onChange={(v) => update("job", v)}
+                      options={JOB_OPTIONS}
                     />
                   </div>
 
@@ -288,6 +291,47 @@ function Field({
       <label htmlFor={id}>
         {label} <span className="text-gold-500">*</span>
       </label>
+    </div>
+  );
+}
+
+function SelectField({
+  id,
+  label,
+  value,
+  onChange,
+  options,
+}: {
+  id: string;
+  label: string;
+  value: string;
+  onChange: (v: string) => void;
+  options: string[];
+}) {
+  return (
+    <div className="select-field">
+      <select
+        id={id}
+        name={id}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        required
+      >
+        <option value="" disabled>
+          선택해주세요
+        </option>
+        {options.map((o) => (
+          <option key={o} value={o}>
+            {o}
+          </option>
+        ))}
+      </select>
+      <label htmlFor={id}>
+        {label} <span className="text-gold-500">*</span>
+      </label>
+      <span className="select-arrow" aria-hidden>
+        ▾
+      </span>
     </div>
   );
 }
