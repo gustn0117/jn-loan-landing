@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { sbAdmin } from "@/lib/supabase";
 import { getClientIp, looksLikeBot } from "@/lib/ip";
+import { normalizePhone, validateName, validateAge } from "@/lib/validation";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -10,61 +11,70 @@ const RATE_WINDOW_MS = 60 * 60 * 1000;
 const RATE_LIMIT_SOFT = 3;
 const RATE_LIMIT_HARD = 5;
 
-const PHONE_RE = /^[0-9\-+\s()]{9,20}$/;
 const ALLOWED_JOBS = ["무직자", "직장인", "개인사업자", "법인사업자"];
+
+function bad(error: string, status = 400) {
+  return NextResponse.json({ ok: false, error }, { status });
+}
 
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json().catch(() => null);
-    if (!body || typeof body !== "object") {
-      return NextResponse.json({ ok: false, error: "INVALID" }, { status: 400 });
-    }
+    if (!body || typeof body !== "object") return bad("INVALID");
 
     const { name, phone, age, job, agree, hp, ts } = body as Record<string, unknown>;
 
+    // Honeypot — silently accept (don't tell the bot it failed)
     if (typeof hp === "string" && hp.length > 0) {
       return NextResponse.json({ ok: true });
     }
 
+    // Time-on-page guard
     const elapsed = typeof ts === "number" ? Date.now() - ts : 0;
-    if (!ts || elapsed < MIN_FILL_MS) {
-      return NextResponse.json({ ok: false, error: "TOO_FAST" }, { status: 400 });
-    }
+    if (!ts || elapsed < MIN_FILL_MS) return bad("TOO_FAST");
 
-    if (
-      typeof name !== "string" ||
-      typeof phone !== "string" ||
-      !name.trim() ||
-      !phone.trim() ||
-      !PHONE_RE.test(phone.trim()) ||
-      agree !== true
-    ) {
-      return NextResponse.json({ ok: false, error: "INVALID" }, { status: 400 });
-    }
+    // Agreement is required
+    if (agree !== true) return bad("INVALID");
+
+    // Field-level validation with specific error codes for UX
+    const cleanName = validateName(name);
+    if (!cleanName) return bad("INVALID_NAME");
+
+    const normalizedPhone = normalizePhone(phone);
+    if (!normalizedPhone) return bad("INVALID_PHONE");
+
+    const validAge = validateAge(age);
+    if (validAge === null) return bad("INVALID_AGE");
+
     if (typeof job !== "string" || !ALLOWED_JOBS.includes(job)) {
-      return NextResponse.json({ ok: false, error: "INVALID" }, { status: 400 });
-    }
-    if (name.length > 40) {
-      return NextResponse.json({ ok: false, error: "INVALID" }, { status: 400 });
+      return bad("INVALID_JOB");
     }
 
+    // Bot user-agent
     const ua = req.headers.get("user-agent");
-    if (looksLikeBot(ua)) {
-      return NextResponse.json({ ok: false, error: "BLOCKED" }, { status: 403 });
-    }
+    if (looksLikeBot(ua)) return bad("BLOCKED", 403);
 
     const ip = getClientIp(req);
     const sb = sbAdmin();
 
+    // IP blocklist
     const { data: blocked } = await sb
       .from("blocked_ips")
       .select("ip")
       .eq("ip", ip)
       .maybeSingle();
-    if (blocked) {
-      return NextResponse.json({ ok: false, error: "BLOCKED" }, { status: 403 });
-    }
+    if (blocked) return bad("BLOCKED", 403);
 
+    // Duplicate phone — already applied previously (canonical match)
+    const { data: existing } = await sb
+      .from("applications")
+      .select("id")
+      .eq("phone", normalizedPhone)
+      .limit(1)
+      .maybeSingle();
+    if (existing) return bad("DUPLICATE_PHONE", 409);
+
+    // Per-IP rate limit in the last hour
     const since = new Date(Date.now() - RATE_WINDOW_MS).toISOString();
     const { count } = await sb
       .from("applications")
@@ -77,32 +87,24 @@ export async function POST(req: NextRequest) {
         ip,
         reason: `자동 차단 — 1시간 내 ${RATE_LIMIT_HARD}회 이상 시도`,
       });
-      return NextResponse.json({ ok: false, error: "BLOCKED" }, { status: 403 });
+      return bad("BLOCKED", 403);
     }
     if ((count ?? 0) >= RATE_LIMIT_SOFT) {
-      return NextResponse.json(
-        { ok: false, error: "RATE_LIMIT" },
-        { status: 429 }
-      );
+      return bad("RATE_LIMIT", 429);
     }
 
-    const ageNum = typeof age === "string" || typeof age === "number" ? Number(age) : null;
-
     const { error } = await sb.from("applications").insert({
-      name: String(name).trim().slice(0, 40),
-      phone: String(phone).trim().slice(0, 20),
-      age: ageNum && Number.isFinite(ageNum) ? Math.floor(ageNum) : null,
-      job: job as string,
+      name: cleanName,
+      phone: normalizedPhone,
+      age: validAge,
+      job,
       ip,
       user_agent: ua?.slice(0, 300) ?? null,
     });
 
-    if (error) {
-      return NextResponse.json({ ok: false, error: "DB" }, { status: 500 });
-    }
-
+    if (error) return bad("DB", 500);
     return NextResponse.json({ ok: true });
   } catch {
-    return NextResponse.json({ ok: false, error: "SERVER" }, { status: 500 });
+    return bad("SERVER", 500);
   }
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, FormEvent, useEffect } from "react";
+import { formatPhoneInput, normalizePhone, validateName, validateAge } from "@/lib/validation";
 
 type Form = {
   name: string;
@@ -45,6 +46,20 @@ export default function ApplyForm() {
       return;
     }
 
+    // Client-side mirror of server validation — better UX, no round-trip
+    if (!validateName(form.name)) {
+      setError("이름을 정확히 입력해주세요 (한글·영문 2~8자).");
+      return;
+    }
+    if (!normalizePhone(form.phone)) {
+      setError("휴대폰 번호를 정확히 입력해주세요 (010-1234-5678 형식).");
+      return;
+    }
+    if (validateAge(form.age) === null) {
+      setError("나이는 19~80 사이로 입력해주세요.");
+      return;
+    }
+
     setSubmitting(true);
     try {
       const res = await fetch("/api/apply", {
@@ -63,6 +78,16 @@ export default function ApplyForm() {
       const json = await res.json().catch(() => ({}));
       if (res.ok && json.ok) {
         setSubmitted(true);
+      } else if (res.status === 409 || json.error === "DUPLICATE_PHONE") {
+        setError("이미 신청이 접수된 번호입니다. 곧 전문 상담사가 연락드릴 예정입니다.");
+      } else if (json.error === "INVALID_PHONE") {
+        setError("휴대폰 번호 형식이 올바르지 않습니다 (010-1234-5678).");
+      } else if (json.error === "INVALID_NAME") {
+        setError("이름을 정확히 입력해주세요 (한글·영문 2~8자).");
+      } else if (json.error === "INVALID_AGE") {
+        setError("나이는 19~80 사이로 입력해주세요.");
+      } else if (json.error === "INVALID_JOB") {
+        setError("직장 정보를 선택해주세요.");
       } else if (res.status === 429) {
         setError("짧은 시간에 너무 많은 신청이 접수되었습니다. 잠시 후 다시 시도해주세요.");
       } else if (res.status === 403) {
@@ -190,6 +215,7 @@ export default function ApplyForm() {
                     <Field
                       id="name"
                       label="이름"
+                      maxLength={8}
                       value={form.name}
                       onChange={(v) => update("name", v)}
                     />
@@ -197,17 +223,20 @@ export default function ApplyForm() {
                       id="phone"
                       label="연락처"
                       type="tel"
-                      inputMode="tel"
+                      inputMode="numeric"
+                      maxLength={13}
+                      placeholderHint="010-1234-5678"
                       value={form.phone}
-                      onChange={(v) => update("phone", v)}
+                      onChange={(v) => update("phone", formatPhoneInput(v))}
                     />
                     <Field
                       id="age"
                       label="나이"
-                      type="number"
+                      type="text"
                       inputMode="numeric"
+                      maxLength={3}
                       value={form.age}
-                      onChange={(v) => update("age", v)}
+                      onChange={(v) => update("age", v.replace(/\D/g, "").slice(0, 3))}
                     />
                     <SelectField
                       id="job"
@@ -268,6 +297,8 @@ function Field({
   onChange,
   type = "text",
   inputMode,
+  maxLength,
+  placeholderHint,
 }: {
   id: string;
   label: string;
@@ -275,6 +306,8 @@ function Field({
   onChange: (v: string) => void;
   type?: string;
   inputMode?: "text" | "tel" | "numeric" | "email";
+  maxLength?: number;
+  placeholderHint?: string;
 }) {
   return (
     <div className="field">
@@ -283,13 +316,20 @@ function Field({
         name={id}
         type={type}
         inputMode={inputMode}
+        maxLength={maxLength}
         placeholder=" "
         value={value}
         onChange={(e) => onChange(e.target.value)}
         required
+        autoComplete="off"
       />
       <label htmlFor={id}>
         {label} <span className="text-gold-500">*</span>
+        {placeholderHint && !value && (
+          <span className="ml-2 normal-case tracking-normal text-ink-700/40">
+            예) {placeholderHint}
+          </span>
+        )}
       </label>
     </div>
   );
